@@ -8,16 +8,25 @@ public class EnemyAI : MonoBehaviour
     public NavMeshAgent enemy;
     public Transform Player;
     public GameObject enemyBullet;
+    public Transform spawnPoint;
+    public float rangeToShoot;
+
     public float enemySpeed;
     [SerializeField] private float Timer = 5;
-    public float rangeToShoot;
-    public Transform spawnPoint;
+    
     bool isShooting;
 
-    public void Update()
+    
+    void Start()
+    {
+        enemy = GetComponent<NavMeshAgent>();
+    }
+
+
+    void Update()
     {
         enemy.SetDestination(Player.position);
-
+        
         float distance = Vector3.Distance(transform.position, Player.position);
 
         if (distance <= rangeToShoot)
@@ -31,14 +40,16 @@ public class EnemyAI : MonoBehaviour
         else
         {
             CancelInvoke("ShootAtPlayer");
+            isShooting = false;
         }
     }
-
+    
     void ShootAtPlayer()
     {
-        GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.position, Quaternion.identity);
+        GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.position, spawnPoint.rotation);
+
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-        bulletRig.AddForce((Player.position - spawnPoint.position).normalized * enemySpeed, ForceMode.Impulse);
-        Destroy(bulletObj, 5f);
+        bulletRig.AddForce((Player.position - spawnPoint.position).normalized * 100, ForceMode.Impulse);
+        Destroy(bulletObj, 1f);
     }
 }
