@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class PLAYER : MonoBehaviour {
 
+    public static float VIDA = 100;
     CharacterController controller;
+
+    public GameObject gameOverCanvas;
 
     Vector3 forward;
     Vector3 strafe;
@@ -17,7 +20,7 @@ public class Player : MonoBehaviour {
     float timeToMaxHeight = 0.5f;
 
     void Start() {
-
+        gameOverCanvas.SetActive(false);
         controller = GetComponent<CharacterController>();
 
         gravity = (-2 * maxJumpHeight) / (timeToMaxHeight * timeToMaxHeight);
@@ -52,7 +55,19 @@ public class Player : MonoBehaviour {
         Vector3 finalVelocity = forward + strafe + vertical;
 
         controller.Move(finalVelocity * Time.deltaTime);
+       
+        if (VIDA <= 0)
+        {
+            gameOverCanvas.SetActive(true);
+            Time.timeScale = 0;
+            // Mostrar o cursor do mouse
+            Cursor.visible = true;
+            // Permitir que o cursor se mova livremente
+            Cursor.lockState = CursorLockMode.None;
 
+            Debug.Log("morreu");
+        }
+        
 
     }
 
