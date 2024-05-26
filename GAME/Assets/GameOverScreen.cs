@@ -11,7 +11,9 @@ public class GameOverScreen : MonoBehaviour
     public void RestartButton()
     {
         gameOverCanvas.SetActive(false);
-        SceneManager.LoadScene("Main");// FALTA AJUSTAR AINDA
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        SceneManager.LoadScene("Main");
         Debug.Log("Main");
     }
 

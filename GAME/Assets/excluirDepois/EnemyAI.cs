@@ -5,7 +5,7 @@ public class INTELIGENCIA : MonoBehaviour
     public Transform Player;
     private UnityEngine.AI.NavMeshAgent naveMesh;
     private float DistanciaDoPlayer, DistanciaDoAIPoint;
-    public float DistanciaDePercepcao = 30, DistanciaDeSeguir = 20, DistanciaDeAtacar = 2, VelocidadeDePasseio = 3, VelocidadeDePerseguicao = 6, TempoPorAtaque = 1.5f, DanoDoInimigo = 40;
+    public float DistanciaDePercepcao = 30, DistanciaDeSeguir = 100, DistanciaDeAtacar = 2, VelocidadeDePasseio = 3, VelocidadeDePerseguicao = 6, TempoPorAtaque = 1.5f, DanoDoInimigo = 40;
     private bool VendoOPlayer;
     public Transform[] DestinosAleatorios;
     private int AIPointAtual;
@@ -139,7 +139,6 @@ public class INTELIGENCIA : MonoBehaviour
     }
     void Perseguir()
     {
-        
         naveMesh.acceleration = 8;
         naveMesh.speed = VelocidadeDePerseguicao;
         naveMesh.destination = Player.position;
