@@ -27,6 +27,7 @@ public class FirstPersonCamera : MonoBehaviour
         //Remover o cursor da tela
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        FindObjectOfType<AudioManager>().Play("Background");
 
     }
         
